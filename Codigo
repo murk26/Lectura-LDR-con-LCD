@@ -1,0 +1,25 @@
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27,16,2); // si no te sale con esta direccion  puedes usar (0x3f,16,2) || (0x27,16,2)  ||(0x20,16,2) 
+
+
+const int LDRPin = A2;
+
+void setup() {
+  pinMode(LDRPin, INPUT);
+  lcd.init();
+  lcd.backlight();
+ 
+  Serial.begin(9600);
+
+}
+
+void loop() {
+
+  int luz = analogRead(LDRPin);
+
+  Serial.print(luz); //para comprobar que funciona bien el LCD, comparando con el serial
+  lcd.print(luz); 
+  delay(500);
+  lcd.clear();
+}
